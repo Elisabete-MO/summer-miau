@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 export class Header extends Component {
   render() {
@@ -13,8 +12,6 @@ export class Header extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  email: state.user.email,
-});
 
-export default connect(mapStateToProps)(Header);
+
+export default Header;

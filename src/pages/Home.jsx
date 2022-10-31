@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import { connect } from 'react-redux';
-import { getRequest, getClicks } from '../redux/actions';
 import Result from '../components/Result';
 import '../styles/Home.css';
 
@@ -36,20 +34,14 @@ export class Home extends Component {
   }
 
   componentDidMount = () => {
-    const { pegaAPI } = this.props;
-    pegaAPI();
     this.cronometro();
   }
   
   handleBtn = () => {
-    const { clickGlobal } = this.props;
-    this.setState((prev) => ({ clicks: prev.clicks + 1 }), () => {
-      const { clicks } = this.state;
-      clickGlobal(clicks)} )
+    this.setState((prev) => ({ clicks: prev.clicks + 1 }))
   }
 
   render() {
-    const { responseApi, getClickGlobal } = this.props;
     const { clicks, timer, result } = this.state;
 
     return (
@@ -59,22 +51,18 @@ export class Home extends Component {
           <>
         <p> { timer } </p>
         <p> { clicks }</p>
-        <p> { getClickGlobal } </p>
-        { (
-          responseApi.length > 0 && (
           <button
             type="button"
             onClick= { this.handleBtn }
           >
             <img 
-              key={ responseApi[0].id } 
-              src={ responseApi[0].url } 
+              key='' 
+              src='' 
               alt="cat" 
               className="cat-img"
             />
           </button>
-          ))
-        }
+       
           </>
 )}
     <button onClick={this.cronometro}>Reiniciar</button>
@@ -83,14 +71,4 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  responseApi: state.cats.api,
-  getClickGlobal: state.cats.clicks,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  pegaAPI: () => dispatch(getRequest()),
-  clickGlobal: (payload) => dispatch(getClicks(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

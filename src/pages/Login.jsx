@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { getEmail, getRequest } from '../redux/actions';
 import '../styles/Login.css'
 
 class Login extends Component {
@@ -28,9 +26,7 @@ class Login extends Component {
 
   handleBtn = (e) => {
     e.preventDefault()
-    const { history, dispatch } = this.props;
-    const { name } = this.state;
-    dispatch(getEmail(name)); //email - string (poderia mandar o estado todo se precisasse)
+    const { history } = this.props;
     history.push('/cats');
   }
 
@@ -73,4 +69,4 @@ class Login extends Component {
 }
 
 
-export default connect()(Login);
+export default Login;
